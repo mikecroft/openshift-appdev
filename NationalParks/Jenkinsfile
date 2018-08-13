@@ -82,7 +82,8 @@ podTemplate(label: customSlavePod
           stage('Build and Tag OpenShift Image') {
             echo "Building OpenShift container image ${app}:${devTag}"
             // start build
-            sh "${ocnd} start-build ${app} --follow --from-file=./${APP}/target/${app}.jar"  
+            sleep 650
+            sh "${ocnd} start-build ${app} --follow --from-file=./${APP}/target/${app}.jar --wait=true"  
             
             // Use Nexus instead
             // sh "${ocnd} start-build ${app} --follow --from-file=http://nexus3-${GUID}-nexus.apps.na39.openshift.opentlc.com/repository/releases/com/openshift/evg/roadshow/${app}/1.0/${app}-1.0.jar"
