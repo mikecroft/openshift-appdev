@@ -96,7 +96,7 @@ podTemplate(label: customSlavePod
             echo "Deploying container image to Development Project"
             sh "${ocnd} set image dc/${app} ${app}=docker-registry.default.svc:5000/${GUID}-parks-dev/${app}:${devTag}"
 
-            openshiftDeploy  depCfg: app, namespace: "${GUID}-parks-dev", waitTime: '30', waitUnit: 'min'
+            openshiftDeploy  depCfg: app, namespace: "${GUID}-parks-dev", waitTime: '15', waitUnit: 'min'
             openshiftVerifyDeployment  depCfg: app, namespace: "${GUID}-parks-dev", replicaCount: '1', verbose: 'false', verifyReplicaCount: 'true'
             openshiftVerifyService  namespace: "${GUID}-parks-dev", svcName: app, verbose: 'false'
           }
@@ -130,7 +130,7 @@ podTemplate(label: customSlavePod
            
             sh "${ocnp} set image dc/${destApp} ${destApp}=docker-registry.default.svc:5000/${GUID}-parks-prod/${app}:${prodTag}"
 
-            openshiftDeploy  depCfg: destApp, namespace: "${GUID}-parks-prod", waitTime: '30', waitUnit: 'min'
+            openshiftDeploy  depCfg: destApp, namespace: "${GUID}-parks-prod", waitTime: '15', waitUnit: 'min'
             openshiftVerifyDeployment  depCfg: destApp, namespace: "${GUID}-parks-prod", replicaCount: '1', verbose: 'false', verifyReplicaCount: 'true'
             openshiftVerifyService  namespace: "${GUID}-parks-prod", svcName: destApp, verbose: 'false'
           }
