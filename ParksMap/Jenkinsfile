@@ -82,6 +82,7 @@ podTemplate(label: customSlavePod
           stage('Build and Tag OpenShift Image') {
             echo "Building OpenShift container image ${app}:${devTag}"
             // start build
+            sleep 600
             sh "${ocnd} start-build ${app} --follow --from-file=./${APP}/target/${app}.jar --wait=true"  
             
             // Use Nexus instead
